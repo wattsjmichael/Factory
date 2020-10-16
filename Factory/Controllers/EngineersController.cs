@@ -10,7 +10,7 @@ namespace Factory.Controllers
   public class EngineersController : Controller
   {
     private readonly FactoryContext _db;
-    
+
     public EngineersController(FactoryContext db)
     {
       _db = db;
@@ -31,20 +31,21 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
     public ActionResult Details(int id)
     {
-      Engineer ThisEngineer = _db.Engineers
+      var thisEngineer = _db.Engineers
       .Include(engineer => engineer.Machines)
       .ThenInclude(join => join.Machine)
       .FirstOrDefault(engineer => engineer.EngineerId == id);
-      return View(ThisEngineer);
+      return View(thisEngineer);
     }
+
     public ActionResult Edit(int id)
     {
-      Engineer ThisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
-      return View(ThisEngineer);
+      var thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
+      return View(thisEngineer);
     }
+
     [HttpPost]
     public ActionResult Edit(Engineer engineer)
     {
@@ -52,15 +53,17 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
     public ActionResult Delete(int id)
     {
-      Engineer thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
+      var thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
       return View(thisEngineer);
     }
+
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Engineer thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
+      var thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
       _db.Engineers.Remove(thisEngineer);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -68,11 +71,11 @@ namespace Factory.Controllers
 
     public ActionResult AddMachine(int id)
     {
-      Engineer thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+      var thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName"); //PatientName == Dropdown
       return View(thisEngineer);
     }
-
+    
     [HttpPost]
     public ActionResult AddMachine(Engineer engineer, int MachineId)
     {
@@ -81,8 +84,9 @@ namespace Factory.Controllers
         _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = engineer.EngineerId, MachineId = MachineId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = engineer.EngineerId });
+      return RedirectToAction("Details", new { id = engineer.EngineerId});
     }
+
     [HttpPost]
     public ActionResult RemoveMachine(int EngineerMachineId)
     {
@@ -91,14 +95,5 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-
-
-
-
-
-
-
   }
-
 }
