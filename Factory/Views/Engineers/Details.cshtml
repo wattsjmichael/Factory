@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer;
+<h2>Engineer Details</h2>
+<hr /> 
+<h3>@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)</h3>
+
+@if(@Model.Machines.Count == 0)
+{
+  <p>This Engineer is not working on any machines</p>
+} 
+else
+{
+  <h4>Machines:</h4>
+  <ul>
+  @foreach(EngineerMachine join in Model.Machines)
+  {
+    <li>@join.Machine.MachineName</li>
+    @using (Html.BeginForm("RemoveMachine", "Engineer"))
+    {
+      @Html.Hidden("EngineerMachineId", @join.EngineerMachineId)
+      <input type="submit" value="Remove"/>
+    }
+  }
+  </ul>
+}

@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+
+<h2>Edit</h2>
+<hr />
+
+<h4>Edit this Engineer: @Html.DisplayFor(model => model.EngineerName)</h4>
+
+@using (Html.BeginForm())
+{
+  <table class="set-table">
+    @Html.HiddenFor(model => model.EngineerId)
+    <tr>
+      <td>@Html.LabelFor(model => model.EngineerName)</td>
+      <td>@Html.EditorFor(model => model.EngineerName)</td>
+    </tr>
+    <tr>
+      <td>@Html.LabelFor(model => model.EngineerDate)</td>
+      <td>@Html.EditorFor(model => model.EngineerDate)</td>
+    </tr>
+  </table>
+  <input type="submit" value="Save" />
+}
