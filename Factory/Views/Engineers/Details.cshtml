@@ -5,11 +5,11 @@
 @model Factory.Models.Engineer;
 <h2>Engineer Details</h2>
 <hr /> 
-<h3>@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)</h3>
+<h3>Name: @Html.DisplayFor(model => model.EngineerName)</h3>
 
 @if(@Model.Machines.Count == 0)
 {
-  <p>This Engineer is not working on any machines</p>
+  <p>This Engineer isnt working on any machines</p>
 } 
 else
 {
@@ -18,11 +18,15 @@ else
   @foreach(EngineerMachine join in Model.Machines)
   {
     <li>@join.Machine.MachineName</li>
-    @using (Html.BeginForm("RemoveMachine", "Engineer"))
+    @using (Html.BeginForm("RemoveMachine", "Engineers"))
     {
       @Html.Hidden("EngineerMachineId", @join.EngineerMachineId)
-      <input type="submit" value="Remove"/>
+      <input type="submit" value="Remove" />
     }
   }
   </ul>
 }
+
+<p>@Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Delete Engineerr", "Delete", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Add Machine", "AddMachine", new { id = Model.EngineerId })</p>

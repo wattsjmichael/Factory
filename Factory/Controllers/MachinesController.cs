@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FactoryList.Controllers
 {
-  public class MachinesController : Controllers
+  public class MachinesController : Controller
   {
     private readonly FactoryContext _db;
 
@@ -31,6 +31,7 @@ namespace FactoryList.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    
     public ActionResult Details(int id)
     {
       Machine thisMachine = _db.Machines
