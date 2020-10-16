@@ -95,5 +95,30 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+     public ActionResult AddExpertise(int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
+      ViewBag.ExpertiseId = new SelectList(_db.Expertises, "ExpertiseId", "ExpertiseArea"); 
+      return View(thisEngineer);
+    }
+    [HttpPost]
+    public ActionResult AddExpertiese(Engineer engineer, int ExpertiseId)
+    {
+      if (ExpertiseId != 0)
+      {
+        _db.EngineerExpertise.Add(new EngineerExpertise() { EngineerId = engineer.EngineerId, ExpertiseId = ExpertiseId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = expertise.ExpertiseId});
+    }
+    [HttpPost]
+    public ActionResult RemoveExpertise(int EngineerExpertiseId)
+    {
+      EngineerExpertise joinEntry = _db.EngineerExpertise.FirstOrDefault(x => x.EngineerExpertiseId == EngineerExpertiseId);
+      _db.EngineerExpertise.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
   }
 }
