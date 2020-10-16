@@ -22,19 +22,24 @@ namespace FactoryList.Controllers
     }
     public ActionResult Create()
     {
+      ViewBag.EngineerId = new SelectList(_db.Machines, "MachineId", "MachineName");
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Machine machine)
+    public ActionResult Create(Machine machine, int EngineerId)
     {
       _db.Machines.Add(machine);
+      if(EngineerId !=0)
+      {
+        _db.EngineerMachine.Add(new EngineerMachine() {EngineerId = EngineerId, MachineId = machine.MachineId});
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
     
     public ActionResult Details(int id)
     {
-      Machine thisMachine = _db.Machines
+      var thisMachine = _db.Machines
       .Include(machine => machine.Engineers)
       .ThenInclude(join => join.Engineer)
       .FirstOrDefault(machine=> machine.MachineId == id);
