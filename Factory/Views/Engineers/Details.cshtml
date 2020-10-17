@@ -23,4 +23,27 @@ else
   }
   </ul>
 }
+@if(@Model.Expertises.Count == 0)
+{
+  <p> This Engineer has not been assigned an expertise</p>
+}
+else
+{
+  <h4>Expertise</h4>
+  <ul>
+    @foreach(var join in Model.Expertises)
+    {
+      <li>@join.Expertise.ExpertiseArea</li>
+      @using (Html.BeginForm("RemoveExpertise", "Engineers"))
+      {
+        @Html.Hidden("EngineerExpertiseId", @join.EngineerExpertiseId)
+        <input type="submit" value="Remove" />
+      }
+    }
+  </ul>
+}
 
+<p>@Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Delete Engineer", "Delete", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Add Machine", "AddMachine", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Add Expertise", "AddExpertise", new { id = Model.EngineerId })</p>

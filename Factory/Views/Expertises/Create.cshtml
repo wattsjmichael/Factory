@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Expertise
+
+<h4>Add a new Expertise</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.ExpertiseArea)
+  @Html.TextBoxFor(model => model.ExpertiseArea)
+  
+  <input type="submit" value="Add a new Expertise" />
+}

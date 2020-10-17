@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Expertise
+
+<h2>Edit</h2>
+<hr />
+
+<h4>Edit this Expertise: @Html.DisplayFor(model => model.ExpertiseArea)</h4>
+
+@using (Html.BeginForm())
+{
+  <table class="set-table">
+    @Html.HiddenFor(model => model.ExpertiseId)
+    <tr>
+      <td>@Html.LabelFor(model => model.ExpertiseArea)</td>
+      <td>@Html.EditorFor(model => model.ExpertiseArea)</td>
+    </tr>
+  </table>
+  <input type="submit" value="Save" />
+}

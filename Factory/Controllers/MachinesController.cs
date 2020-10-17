@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace FactoryList.Controllers
+namespace Factory.Controllers
 {
   public class MachinesController : Controller
   {

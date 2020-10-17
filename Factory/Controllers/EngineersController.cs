@@ -33,9 +33,11 @@ namespace Factory.Controllers
     }
     public ActionResult Details(int id)
     {
-      var thisEngineer = _db.Engineers
+      Engineer thisEngineer = _db.Engineers
       .Include(engineer => engineer.Machines)
       .ThenInclude(join => join.Machine)
+      .Include(x=>x.Expertises)
+      .ThenInclude(join=>join.Expertise)
       .FirstOrDefault(engineer => engineer.EngineerId == id);
       return View(thisEngineer);
     }
@@ -75,7 +77,7 @@ namespace Factory.Controllers
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName"); //PatientName == Dropdown
       return View(thisEngineer);
     }
-    
+
     [HttpPost]
     public ActionResult AddMachine(Engineer engineer, int MachineId)
     {
@@ -84,7 +86,7 @@ namespace Factory.Controllers
         _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = engineer.EngineerId, MachineId = MachineId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = engineer.EngineerId});
+      return RedirectToAction("Details", new { id = engineer.EngineerId });
     }
 
     [HttpPost]
@@ -95,10 +97,10 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-     public ActionResult AddExpertise(int id)
+    public ActionResult AddExpertise(int id)
     {
       Engineer thisEngineer = _db.Engineers.FirstOrDefault(x => x.EngineerId == id);
-      ViewBag.ExpertiseId = new SelectList(_db.Expertises, "ExpertiseId", "ExpertiseArea"); 
+      ViewBag.ExpertiseId = new SelectList(_db.Expertises, "ExpertiseId", "ExpertiseArea");
       return View(thisEngineer);
     }
     [HttpPost]
@@ -109,7 +111,7 @@ namespace Factory.Controllers
         _db.EngineerExpertise.Add(new EngineerExpertise() { EngineerId = engineer.EngineerId, ExpertiseId = ExpertiseId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = expertise.ExpertiseId});
+      return RedirectToAction("Details", new { id = engineer.EngineerId });
     }
     [HttpPost]
     public ActionResult RemoveExpertise(int EngineerExpertiseId)

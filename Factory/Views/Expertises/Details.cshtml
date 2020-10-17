@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Expertise;
+
+<h2>Expertise Details</h2>
+<hr /> 
+<h3>Name: @Html.DisplayFor(model => model.ExpertiseArea)</h3>
+
+@if(@Model.Engineers.Count == 0)
+{
+  <p>This Expertise does not have any Engineers</p>
+} 
+else
+{
+  <h4>Engineers:</h4>
+  <ul>
+  @foreach(var join in Model.Engineers)
+  {
+    <li>@join.Engineer.EngineerName</li>
+    @using (Html.BeginForm("RemoveEngineer", "Machines"))
+    {
+      @Html.Hidden("EngineerExpertiseId", @join.EngineerExpertiseId)
+      <input type="submit" value="Remove" />
+    }
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Expertise", "Edit", new { id = Model.ExpertiseId })</p>
+<p>@Html.ActionLink("Delete Expertise", "Delete", new { id = Model.ExpertiseId })</p>
+<p>@Html.ActionLink("Add Engineer", "AddEngineer", new { id = Model.ExpertiseId })</p>

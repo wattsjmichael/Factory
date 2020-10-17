@@ -7,6 +7,7 @@ namespace Factory.Models
     public Engineer()
     {
       this.Machines = new HashSet<EngineerMachine>();
+      this.Expertises = new HashSet<EngineerExpertise>();
     }
     public int EngineerId { get; set;}
     public string EngineerName {get; set;}
@@ -15,6 +16,7 @@ namespace Factory.Models
 
     
     public ICollection<EngineerMachine> Machines {get;}
+    public ICollection<EngineerExpertise> Expertises {get;}
 
   }
 }
