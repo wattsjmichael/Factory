@@ -22,7 +22,7 @@ body, html {
 }
 
 .hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.pinimg.com/originals/7c/88/0f/7c880f35e7ea459368cefb86c5140372.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1584275142335-7f7cc7ba6c23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -48,7 +48,7 @@ h4 {
   color: white;
 }
 
-.col-md-6 {
+.col-md-4 {
   text-align: center;
   padding-top: 40px;
 }

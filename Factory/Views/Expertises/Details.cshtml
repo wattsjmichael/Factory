@@ -19,7 +19,7 @@ else
   @foreach(var join in Model.Engineers)
   {
     <li>@join.Engineer.EngineerName</li>
-    @using (Html.BeginForm("RemoveEngineer", "Machines"))
+    @using (Html.BeginForm("RemoveExpertise", "Engineers"))
     {
       @Html.Hidden("EngineerExpertiseId", @join.EngineerExpertiseId)
       <input type="submit" value="Remove" />

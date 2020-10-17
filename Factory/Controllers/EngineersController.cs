@@ -104,7 +104,7 @@ namespace Factory.Controllers
       return View(thisEngineer);
     }
     [HttpPost]
-    public ActionResult AddExpertiese(Engineer engineer, int ExpertiseId)
+    public ActionResult AddExpertise(Engineer engineer, int ExpertiseId)
     {
       if (ExpertiseId != 0)
       {
