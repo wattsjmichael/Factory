@@ -6,51 +6,69 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="full-width">
-<div class="hero-image">
-  <div class="hero-text">
-          <h1 class="whiteText">Dr. Sillystringz's Factory</h1>
-          <div class="col-md-3">
-          <p>@Html.ActionLink("Add A Engineer", "Index", "Engineers", null, new { @class = "btn btn-info btn-large" })</p>
-        </div>
-        <div class="col-md-3">
-          <p>@Html.ActionLink("See all Machines", "Index", "Machines", null, new { @class = "btn btn-info btn-large" })</p>
-        </div>
-        <div class="col-md-3">
-          <p>@Html.ActionLink("See all Expertises", "Index", "Expertises", null, new { @class = "btn btn-info btn-large" })</p>
-        </div>
+  <div class="hero-image">
+    <div class="hero-text">
+      <h1 class="whiteText">Dr. Sillystringz's Factory</h1>
+      <div class="col-md-3">
+        <p>@Html.ActionLink("Add A Engineer", "Index", "Engineers", null, new { @class = "btn btn-info btn-large" })</p>
+      </div>
+      <div class="col-md-3">
+        <p>@Html.ActionLink("See all Machines", "Index", "Machines", null, new { @class = "btn btn-info btn-large" })
+        </p>
+      </div>
+      <div class="col-md-3">
+        <p>@Html.ActionLink("See all Expertises", "Index", "Expertises", null, new { @class = "btn btn-info btn-large"
+            })</p>
+      </div>
     </div>
+  </div>
 </div>
-</div>
- <div class="col-md-4">
-<h2>Engineers:</h2>
-@if (@Model["engineers"].Count == 0)
-{
-  <h3>No Engineers have been added yet!</h3>
-}
-@foreach (Engineer engineer in Model["engineers"])
-{
-  <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers",new { id = engineer.EngineerId}) </li>
-}
-</div>
- <div class="col-md-4">
-<h2>Machines</h2>
-@if (@Model["machines"].Count == 0)
-{
-  <h3>No Machines have been added yet!</h3>
-}
-@foreach (Machine machine in Model["machines"])
-{
-  <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId}) </li>
-}
-</div>
-<div class="col-md-4">
-<h2>Expertise</h2>
-@if (@Model["expertises"].Count == 0)
-{
-  <h3>Expertise has not been added</h3>
-}
-@foreach (Expertise expertise in Model["expertises"])
-{
-  <li>@Html.ActionLink($"{expertise.ExpertiseArea}", "Details", "Expertises", new { id = expertise.ExpertiseId}) </li>
-}
-</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  See All Machines, Engineers, Expertises
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">List of Everthing</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-4">
+          <h2>Engineers:</h2>
+          @if (@Model["engineers"].Count == 0)
+          {
+            <h3>No Engineers have been added yet!</h3>
+          }
+          @foreach (Engineer engineer in Model["engineers"])
+          {
+            <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers",new { id = engineer.EngineerId}) </li>
+          }
+        </div>
+        <div class="col-md-4">
+          <h2>Machines</h2>
+          @if (@Model["machines"].Count == 0)
+          {
+            <h3>No Machines have been added yet!</h3>
+          }
+          @foreach (Machine machine in Model["machines"])
+          {
+            <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId}) </li>
+          }
+        </div>
+        <div class="col-md-4">
+          <h2>Expertise</h2>
+          @if (@Model["expertises"].Count == 0)
+          {
+            <h3>Expertise has not been added</h3>
+          }
+          @foreach (Expertise expertise in Model["expertises"])
+          {
+            <li>@Html.ActionLink($"{expertise.ExpertiseArea}", "Details", "Expertises", new { id = expertise.ExpertiseId})
+            </li>
+          }
+        </div>
+      </div>
